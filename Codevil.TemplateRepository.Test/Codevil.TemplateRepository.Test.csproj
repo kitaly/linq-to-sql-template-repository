@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\AccountsTest.cs" />
-    <Compile Include="Entities\PeopleTest.cs" />
+    <Compile Include="Model\Entities\AccountsTest.cs" />
+    <Compile Include="Model\Entities\PeopleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AccountsRepositoryTest.cs" />
-    <Compile Include="Repositories\PeopleRepositoryTest.cs" />
+    <Compile Include="Model\Repositories\AccountsRepositoryTest.cs" />
+    <Compile Include="Model\Repositories\PeopleRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Codevil.TemplateRepository.Data\Codevil.TemplateRepository.Data.csproj">

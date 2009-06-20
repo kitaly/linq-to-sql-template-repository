@@ -23,14 +23,14 @@ namespace Codevil.TemplateRepository.Model.Repositories
             return FindSingle(a => a.Id == entity.Id, context);
         }
 
-        protected override void MapToRow(Account entity, ACCOUNT row)
+        protected override void BeforeSave(Account entity, ACCOUNT row)
         {
             row.Agency = entity.Agency;
             row.Number = entity.Number;
             row.OwnerId = entity.OwnerId;
         }
 
-        protected override void MapToEntity(ACCOUNT row, Account entity)
+        protected override void AfterSave(ACCOUNT row, Account entity)
         {
             entity.Id = row.Id;
         }

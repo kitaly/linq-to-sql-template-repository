@@ -31,17 +31,17 @@ namespace Codevil.TemplateRepository.Repositories
             this.RowFactory = new RowFactory<TDataContext>();
         }
 
-        protected abstract void MapToRow(TEntity entity, TRow row);
-        protected abstract void MapToEntity(TRow row, TEntity entity);
+        protected abstract void BeforeSave(TEntity entity, TRow row);
+        protected abstract void AfterSave(TRow row, TEntity entity);
         protected abstract TRow FindEntity(TEntity entity, TDataContext context);
 
         protected virtual void Update(TRow row, TEntity entity, TDataContext context)
         {
-            this.MapToRow(entity, row);
+            this.BeforeSave(entity, row);
             
             context.SubmitChanges();
 
-            this.MapToEntity(row, entity);
+            this.AfterSave(row, entity);
         }
 
         protected virtual void Create(TEntity entity, TDataContext context)
@@ -49,12 +49,12 @@ namespace Codevil.TemplateRepository.Repositories
             TRow row = (TRow)this.RowFactory.Create(typeof(TRow));
             Table<TRow> table = (Table<TRow>)this.RowFactory.CreateTable(typeof(TRow), context);
 
-            this.MapToRow(entity, row);
+            this.BeforeSave(entity, row);
 
             table.InsertOnSubmit(row);
             context.SubmitChanges();
 
-            this.MapToEntity(row, entity);
+            this.AfterSave(row, entity);
         }
 
         public void Save(TEntity entity)
