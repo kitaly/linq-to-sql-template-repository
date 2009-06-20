@@ -42,34 +42,5 @@ namespace Codevil.TemplateRepository.Test.Model.Repositories
 
             Assert.AreEqual("kira.yamato@freedom.jp", retrievedPerson.Email);
         }
-
-        [TestMethod]
-        public void TransactionTest()
-        {
-            Person createdPerson = new Person();
-            createdPerson.Name = "transaction test";
-            createdPerson.Document = "ZGMFX20A";
-            createdPerson.Email = "zaft@no.tameni";
-
-            PeopleRepository repository = new PeopleRepository();
-
-            BankDataContextFactory contextFactory = new BankDataContextFactory();
-
-            UnitOfWork unitOfWork = contextFactory.CreateUnitOfWork();
-
-            repository.Save(createdPerson, unitOfWork);
-
-            unitOfWork.Rollback();
-
-            Assert.IsNull(repository.FindSingle(p => p.Name == createdPerson.Name));
-
-            unitOfWork = contextFactory.CreateUnitOfWork();
-
-            repository.Save(createdPerson, unitOfWork);
-
-            unitOfWork.Commit();
-
-            Assert.IsNotNull(repository.FindSingle(p => p.Name == createdPerson.Name));
-        }
     }
 }

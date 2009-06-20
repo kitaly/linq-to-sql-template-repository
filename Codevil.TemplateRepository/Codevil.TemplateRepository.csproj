@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\DataEntity.cs" />
-    <Compile Include="Entities\UnitOfWork.cs" />
+    <Compile Include="Controllers\UnitOfWork.cs" />
     <Compile Include="Factories\DataContextFactory.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UnitOfWorkTest.cs" />
     <Compile Include="Data\DatabaseDependentTest.cs" />
     <Compile Include="Model\Entities\AccountsTest.cs" />
     <Compile Include="Model\Entities\PeopleTest.cs" />

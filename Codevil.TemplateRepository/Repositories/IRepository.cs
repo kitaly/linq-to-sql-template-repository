@@ -9,6 +9,10 @@ namespace Codevil.TemplateRepository.Repositories
         where TEntity : DataEntity
     {
         IDataContextFactory DataContextFactory { get; set; }
+        IEntityFactory EntityFactory { get; set; }
+        IRowFactory RowFactory { get; set; }
+        bool AutoRollbackOnError { get; set; }
+
         IList<TEntity> Find(Func<TRow, bool> exp);
         TEntity FindSingle(Func<TRow, bool> exp);
         void Save(TEntity entity);

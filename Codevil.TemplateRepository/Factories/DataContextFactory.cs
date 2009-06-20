@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Linq;
 using Codevil.TemplateRepository.Entities;
+using Codevil.TemplateRepository.Controllers;
 
 namespace Codevil.TemplateRepository.Factories
 {

@@ -7,6 +7,7 @@ using System.Data.Linq;
 using Codevil.TemplateRepository.Entities;
 using Codevil.TemplateRepository.Factories;
 using System.Transactions;
+using Codevil.TemplateRepository.Controllers;
 
 namespace Codevil.TemplateRepository.Repositories
 {
@@ -17,6 +18,7 @@ namespace Codevil.TemplateRepository.Repositories
         public IDataContextFactory DataContextFactory { get; set; }
         public IEntityFactory EntityFactory { get; set; }
         public IRowFactory RowFactory { get; set; }
+        public bool AutoRollbackOnError { get; set; }
 
         public Repository(IDataContextFactory dataContextFactory, IEntityFactory entityFactory, IRowFactory rowFactory)
             : this(dataContextFactory, entityFactory)
@@ -29,35 +31,14 @@ namespace Codevil.TemplateRepository.Repositories
             this.DataContextFactory = dataContextFactory;
             this.EntityFactory = entityFactory;
             this.RowFactory = new RowFactory();
+            this.AutoRollbackOnError = true;
         }
 
         protected abstract void BeforeSave(TEntity entity, TRow row);
         protected abstract void AfterSave(TRow row, TEntity entity);
         protected abstract TRow FindEntity(TEntity entity, DataContext context);
 
-        protected virtual void Update(TRow row, TEntity entity, DataContext context)
-        {
-            this.BeforeSave(entity, row);
-
-            context.SubmitChanges();
-
-            this.AfterSave(row, entity);
-        }
-
-        protected virtual void Create(TEntity entity, DataContext context)
-        {
-            TRow row = (TRow)this.RowFactory.Create(typeof(TRow));
-            Table<TRow> table = (Table<TRow>)this.RowFactory.CreateTable(typeof(TRow), context);
-
-            this.BeforeSave(entity, row);
-
-            table.InsertOnSubmit(row);
-            context.SubmitChanges();
-
-            this.AfterSave(row, entity);
-        }
-
-        public void Save(TEntity entity)
+        public virtual void Save(TEntity entity)
         {
             if (entity == null)
             {
@@ -85,7 +66,7 @@ namespace Codevil.TemplateRepository.Repositories
             }
         }
 
-        public void Save(TEntity entity, UnitOfWork unitOfWork)
+        public virtual void Save(TEntity entity, UnitOfWork unitOfWork)
         {
             if (entity == null)
             {
@@ -96,26 +77,20 @@ namespace Codevil.TemplateRepository.Repositories
 
             try
             {
-                TRow retrievedRow = this.FindEntity(entity, context);
-
-                if (retrievedRow != null)
-                {
-                    this.Update(retrievedRow, entity, context);
-                }
-                else
-                {
-                    this.Create(entity, context);
-                }
+                this.Save(entity, context);
             }
             catch
             {
-                unitOfWork.Rollback();
+                if (this.AutoRollbackOnError)
+                {
+                    unitOfWork.Rollback();
+                }
 
                 throw;
             }
         }
 
-        public void Save(TEntity entity, DataContext context)
+        public virtual void Save(TEntity entity, DataContext context)
         {
             TRow retrievedRow = this.FindEntity(entity, context);
 
@@ -129,7 +104,7 @@ namespace Codevil.TemplateRepository.Repositories
             }
         }
 
-        public TEntity FindSingle(Func<TRow, bool> exp)
+        public virtual TEntity FindSingle(Func<TRow, bool> exp)
         {
             DataContext context = this.DataContextFactory.Create();
             TEntity entity = null;
@@ -155,7 +130,7 @@ namespace Codevil.TemplateRepository.Repositories
             return entity;
         }
 
-        public IList<TEntity> Find(Func<TRow, bool> exp)
+        public virtual IList<TEntity> Find(Func<TRow, bool> exp)
         {
             DataContext context = (DataContext)this.DataContextFactory.Create();
 
@@ -173,7 +148,29 @@ namespace Codevil.TemplateRepository.Repositories
             return list;
         }
 
-        protected TRow FindSingle(Func<TRow, bool> exp, DataContext context)
+        protected virtual void Update(TRow row, TEntity entity, DataContext context)
+        {
+            this.BeforeSave(entity, row);
+
+            context.SubmitChanges();
+
+            this.AfterSave(row, entity);
+        }
+
+        protected virtual void Create(TEntity entity, DataContext context)
+        {
+            TRow row = (TRow)this.RowFactory.Create(typeof(TRow));
+            Table<TRow> table = (Table<TRow>)this.RowFactory.CreateTable(typeof(TRow), context);
+
+            this.BeforeSave(entity, row);
+
+            table.InsertOnSubmit(row);
+            context.SubmitChanges();
+
+            this.AfterSave(row, entity);
+        }
+
+        protected virtual TRow FindSingle(Func<TRow, bool> exp, DataContext context)
         {
             IList<TRow> rows = this.Find(exp, context);
 
@@ -191,12 +188,12 @@ namespace Codevil.TemplateRepository.Repositories
             }
         }
 
-        protected IList<TRow> Find(Func<TRow, bool> exp, DataContext context)
+        protected virtual IList<TRow> Find(Func<TRow, bool> exp, DataContext context)
         {
             return context.GetTable<TRow>().Where(exp).ToList();
         }
 
-        protected IList<TEntity> ToEntity(IList<TRow> list)
+        protected virtual IList<TEntity> ToEntity(IList<TRow> list)
         {
             IList<TEntity> entityList = new List<TEntity>();
 
