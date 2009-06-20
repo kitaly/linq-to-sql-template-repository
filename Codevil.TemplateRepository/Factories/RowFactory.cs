@@ -3,20 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Linq;
+using System.Collections;
+using System.Reflection;
 
 namespace Codevil.TemplateRepository.Factories
 {
-    public abstract class RowFactory <TDataContext> : IRowFactory<TDataContext>
+    public class RowFactory <TDataContext> : IRowFactory<TDataContext>
         where TDataContext : DataContext
     {
         #region IRowFactory<TDataContext> Members
 
         public virtual object Create(Type rowType)
         {
-            return Activator.CreateInstance(rowType);
+            object row = null;
+
+            row = Activator.CreateInstance(rowType);
+            
+            return row;
         }
 
-        public abstract object CreateTable(Type rowType, TDataContext context);
+        public virtual object CreateTable(Type rowType, TDataContext context)
+        {
+            object table = null;
+
+            Hashtable pluralInflections = this.MapPluralInflections();
+
+            string pluralizedName = rowType.Name + "s";
+
+            if (pluralInflections.ContainsKey(rowType.Name))
+            {
+                pluralizedName = pluralInflections[rowType.Name].ToString();
+            }
+
+            PropertyInfo property = context.GetType().GetProperty(pluralizedName);
+
+            if (property == null)
+            {
+                throw new MissingMemberException(context.GetType().FullName, pluralizedName);
+            }
+
+            table = property.GetValue(context, null);
+
+            return table;
+        }
+
+        public virtual Hashtable MapPluralInflections()
+        {
+            return new Hashtable();
+        }
 
         #endregion
     }

@@ -44,9 +44,28 @@ namespace Codevil.TemplateRepository.Model.Entities
         public Account(ACCOUNT row)
             : this()
         {
+            this.Id = row.Id;
             this.Number = row.Number;
             this.OwnerId = row.OwnerId;
             this.Agency = row.Agency;
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool areEqual = false;
+
+            if (obj is Account)
+            {
+                Account that = obj as Account;
+
+                areEqual =
+                    this.Id == that.Id &&
+                    this.Agency == that.Agency &&
+                    this.Number == that.Number &&
+                    this.OwnerId == that.OwnerId;
+            }
+
+            return areEqual;
         }
     }
 }

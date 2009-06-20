@@ -19,10 +19,16 @@ namespace Codevil.TemplateRepository.Repositories
         public IRowFactory<TDataContext> RowFactory { get; set; }
 
         public Repository(IDataContextFactory<TDataContext> dataContextFactory, IEntityFactory entityFactory, IRowFactory<TDataContext> rowFactory)
+            : this (dataContextFactory, entityFactory)
+        {
+            this.RowFactory = rowFactory;
+        }
+
+        public Repository(IDataContextFactory<TDataContext> dataContextFactory, IEntityFactory entityFactory)
         {
             this.DataContextFactory = dataContextFactory;
             this.EntityFactory = entityFactory;
-            this.RowFactory = rowFactory;
+            this.RowFactory = new RowFactory<TDataContext>();
         }
 
         protected abstract void MapToRow(TEntity entity, TRow row);
