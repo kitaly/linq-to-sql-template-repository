@@ -42,6 +42,18 @@ namespace Codevil.TemplateRepository.Model.Entities
             this.Email = row.Email;
         }
 
+        public void Save()
+        {
+            this.PeopleRepository.Save(this);
+
+            foreach (Account account in this.Accounts)
+            {
+                account.OwnerId = this.Id;
+
+                this.AccountsRepository.Save(account);
+            }
+        }
+
         public override bool Equals(object obj)
         {
             bool areEqual = false;

@@ -1,10 +1,12 @@
 ﻿using Codevil.TemplateRepository.Model.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Codevil.TemplateRepository.Test.Data;
+using Codevil.TemplateRepository.Model.Repositories;
 
 namespace Codevil.TemplateRepository.Test.Model.Entities
 {
     [TestClass]
-    public class PeopleTest
+    public class PeopleTest : DatabaseDependentTest
     {
         [TestMethod]
         public void EqualsTest()
@@ -51,6 +53,38 @@ namespace Codevil.TemplateRepository.Test.Model.Entities
             Assert.AreNotEqual(person4, person1);
             Assert.AreNotEqual(person5, person1);
             Assert.AreNotEqual(person6, person1);
+        }
+
+        [TestMethod]
+        public void SaveTest()
+        {
+            Account account1 = new Account();
+            account1.Number = 2345235;
+            account1.Agency = 166;
+
+            Person owner = new Person();
+            owner.Name = "Ryu Ken";
+            owner.Document = "3451345";
+            owner.Email = "ansjkldnas@nfjanfjk.ew";
+
+            account1.Owner = owner;
+
+            account1.Save();
+
+            Account account2 = new Account();
+            account2.Number = 464567;
+            account2.Agency = 345;
+
+            owner.Accounts.Add(account2);
+
+            owner.Save();
+
+            AccountsRepository accountsRepository = new AccountsRepository();
+
+            Assert.IsNotNull(accountsRepository.Find(a => a.PERSON.Id == owner.Id));
+            Assert.AreEqual(2, accountsRepository.Find(a => a.PERSON.Id == owner.Id).Count);
+            Assert.IsTrue(accountsRepository.Find(a => a.PERSON.Id == owner.Id).Contains(account1));
+            Assert.IsTrue(accountsRepository.Find(a => a.PERSON.Id == owner.Id).Contains(account2));
         }
     }
 }

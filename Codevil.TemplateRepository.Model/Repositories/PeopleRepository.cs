@@ -11,7 +11,7 @@ namespace Codevil.TemplateRepository.Model.Repositories
             return FindSingle(p => p.Id == entity.Id, context);
         }
 
-        protected override void BeforeSave(Person entity, PERSON row)
+        protected override void BeforeSave(PERSON row, Person entity)
         {
             row.Document = entity.Document;
             row.Email = entity.Email;

@@ -1,10 +1,12 @@
 ﻿using Codevil.TemplateRepository.Model.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Codevil.TemplateRepository.Test.Data;
+using Codevil.TemplateRepository.Model.Repositories;
 
 namespace Codevil.TemplateRepository.Test.Model.Entities
 {
     [TestClass]
-    public class AccountsTest
+    public class AccountsTest : DatabaseDependentTest
     {
         [TestMethod]
         public void EqualsTest()
@@ -51,6 +53,29 @@ namespace Codevil.TemplateRepository.Test.Model.Entities
             Assert.AreNotEqual(account4, account1);
             Assert.AreNotEqual(account5, account1);
             Assert.AreNotEqual(account6, account1);
+        }
+
+        [TestMethod]
+        public void SaveTest()
+        {
+            Account account = new Account();
+            account.Number = 2345235;
+            account.Agency = 166;
+
+            Person owner = new Person();
+            owner.Name = "Ryu Ken";
+            owner.Document = "3451345";
+            owner.Email = "ansjkldnas@nfjanfjk.ew";
+
+            account.Owner = owner;
+
+            account.Save();
+
+            AccountsRepository accountsRepository = new AccountsRepository();
+
+            Assert.IsNotNull(accountsRepository.FindSingle(a => a.Id == account.Id));
+            Assert.IsNotNull(accountsRepository.FindSingle(a => a.PERSON.Name == owner.Name));
+            Assert.IsNotNull(accountsRepository.FindSingle(a => a.PERSON.Id == owner.Id));
         }
     }
 }

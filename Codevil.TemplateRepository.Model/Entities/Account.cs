@@ -1,6 +1,9 @@
 ﻿using Codevil.TemplateRepository.Data;
 using Codevil.TemplateRepository.Model.Repositories;
 using Codevil.TemplateRepository.Repositories;
+using Codevil.TemplateRepository.Controllers;
+using Codevil.TemplateRepository.Data.Factories;
+using Codevil.TemplateRepository.Factories;
 
 namespace Codevil.TemplateRepository.Model.Entities
 {
@@ -44,6 +47,19 @@ namespace Codevil.TemplateRepository.Model.Entities
             this.Number = row.Number;
             this.OwnerId = row.OwnerId;
             this.Agency = row.Agency;
+        }
+
+        public void Save()
+        {
+            UnitOfWork unitOfWork = this.DataContextFactory.CreateUnitOfWork();
+            
+            this.PeopleRepository.Save(this.Owner, unitOfWork);
+
+            this.OwnerId = this.Owner.Id;
+
+            this.AccountsRepository.Save(this, unitOfWork);
+
+            unitOfWork.Commit();
         }
 
         public override bool Equals(object obj)
