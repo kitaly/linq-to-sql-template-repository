@@ -47,5 +47,33 @@ namespace Codevil.TemplateRepository.Test.Model.Repositories
 
             Assert.AreEqual(666, retrievedAccount.Agency);
         }
+
+        [TestMethod]
+        public void FindByPersonNameTest()
+        {
+            Person createdPerson = new Person();
+            createdPerson.Name = "person name test";
+            createdPerson.Document = "ZGMFX20A";
+            createdPerson.Email = "zaft@no.tameni";
+
+            PeopleRepository peopleRepository = new PeopleRepository();
+
+            peopleRepository.Save(createdPerson);
+
+            Account createdAccount = new Account();
+            createdAccount.Agency = 435;
+            createdAccount.Number = 123123123;
+            createdAccount.OwnerId = createdPerson.Id;
+
+            AccountsRepository repository = new AccountsRepository();
+
+            repository.Save(createdAccount);
+
+            Assert.AreNotEqual(0, createdAccount.Id);
+
+            Account retrievedAccount = repository.FindSingle(a => a.PERSON.Name == createdPerson.Name);
+
+            Assert.AreEqual(createdAccount, retrievedAccount);
+        }
     }
 }
