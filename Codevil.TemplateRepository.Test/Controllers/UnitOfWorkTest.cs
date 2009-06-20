@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Codevil.TemplateRepository.Test.Data;
-using Codevil.TemplateRepository.Controllers;
+﻿using Codevil.TemplateRepository.Controllers;
 using Codevil.TemplateRepository.Data.Factories;
-using Codevil.TemplateRepository.Model.Repositories;
 using Codevil.TemplateRepository.Model.Entities;
+using Codevil.TemplateRepository.Model.Repositories;
+using Codevil.TemplateRepository.Test.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Codevil.TemplateRepository.Test.Controllers
 {

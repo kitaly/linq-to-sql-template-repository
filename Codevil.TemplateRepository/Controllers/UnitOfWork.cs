@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Data.Common;
 using System.Data.Linq;
-using System.Transactions;
-using Codevil.TemplateRepository.Factories;
-using System.Data.Common;
 
 namespace Codevil.TemplateRepository.Controllers
 {

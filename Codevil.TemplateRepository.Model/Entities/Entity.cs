@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Codevil.TemplateRepository.Entities;
+﻿using Codevil.TemplateRepository.Entities;
 
 namespace Codevil.TemplateRepository.Model.Entities
 {

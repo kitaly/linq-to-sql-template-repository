@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Codevil.TemplateRepository.Migrations;
 using RikMigrations;
-using Codevil.TemplateRepository.Migrations;
 
 [assembly: Migration(2, Type = typeof(CreateTableAccounts), ModuleName = MigrationData.ModuleName)]
 namespace Codevil.TemplateRepository.Migrations

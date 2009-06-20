@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Linq;
+﻿using System.Data.Linq;
 using Codevil.TemplateRepository.Factories;
-using Codevil.TemplateRepository.Entities;
 
 namespace Codevil.TemplateRepository.Data.Factories
 {

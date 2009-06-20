@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Codevil.TemplateRepository.Entities;
 using Codevil.TemplateRepository.Factories;
+
 namespace Codevil.TemplateRepository.Repositories
 {
     public interface IRepository<TRow, TEntity>

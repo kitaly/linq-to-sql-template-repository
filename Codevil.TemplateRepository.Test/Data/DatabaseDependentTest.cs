@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Codevil.TemplateRepository.Migrations;
+﻿using Codevil.TemplateRepository.Migrations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Codevil.TemplateRepository.Test.Data

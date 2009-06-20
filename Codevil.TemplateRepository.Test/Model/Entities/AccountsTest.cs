@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Codevil.TemplateRepository.Model.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Codevil.TemplateRepository.Model.Entities;
 
 namespace Codevil.TemplateRepository.Test.Model.Entities
 {

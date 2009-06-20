@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RikMigrations;
+﻿using RikMigrations;
 
 namespace Codevil.TemplateRepository.Migrations
 {

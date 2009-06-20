@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Codevil.TemplateRepository.Model.Repositories;
+﻿using System.Collections.Generic;
 using Codevil.TemplateRepository.Data;
+using Codevil.TemplateRepository.Model.Repositories;
 using Codevil.TemplateRepository.Repositories;
 
 namespace Codevil.TemplateRepository.Model.Entities
