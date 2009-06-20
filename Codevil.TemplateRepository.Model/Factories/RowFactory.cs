@@ -8,22 +8,22 @@ using Codevil.TemplateRepository.Factories;
 
 namespace Codevil.TemplateRepository.Model.Factories
 {
-    public class RowFactory : IRowFactory<BankDataContext>
+    public class RowFactory : Codevil.TemplateRepository.Factories.RowFactory<BankDataContext>
     {
-        public object Create(Type rowType)
-        {
-            switch (rowType.Name)
-            {
-                case "ACCOUNT":
-                    return new ACCOUNT();
-                case "PERSON":
-                    return new PERSON();
-                default:
-                    throw new ArgumentException("Invalid type: " + rowType.Name, "rowType");
-            }
-        }
+        //public object Create(Type rowType)
+        //{
+        //    switch (rowType.Name)
+        //    {
+        //        case "ACCOUNT":
+        //            return new ACCOUNT();
+        //        case "PERSON":
+        //            return new PERSON();
+        //        default:
+        //            throw new ArgumentException("Invalid type: " + rowType.Name, "rowType");
+        //    }
+        //}
 
-        public object CreateTable(Type rowType, BankDataContext context)
+        public override object CreateTable(Type rowType, BankDataContext context)
         {
             switch (rowType.Name)
             {

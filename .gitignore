@@ -1,12 +1,13 @@
-bin/**
+bin
 *.suo
 *.user
-*.dll
 *.pdb
-obj/**
+obj
 *.stackdump
 TestResults/**
-*.exe
+*.Cache
 *.manifest
 *.cache
 *.log
+bin/
+obj/
