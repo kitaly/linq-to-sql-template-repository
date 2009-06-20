@@ -8,11 +8,8 @@ using System.Reflection;
 
 namespace Codevil.TemplateRepository.Factories
 {
-    public class RowFactory <TDataContext> : IRowFactory<TDataContext>
-        where TDataContext : DataContext
+    public class RowFactory : IRowFactory
     {
-        #region IRowFactory<TDataContext> Members
-
         public virtual object Create(Type rowType)
         {
             object row = null;
@@ -22,7 +19,7 @@ namespace Codevil.TemplateRepository.Factories
             return row;
         }
 
-        public virtual object CreateTable(Type rowType, TDataContext context)
+        public virtual object CreateTable(Type rowType, DataContext context)
         {
             object table = null;
 
@@ -51,7 +48,5 @@ namespace Codevil.TemplateRepository.Factories
         {
             return new Hashtable();
         }
-
-        #endregion
     }
 }

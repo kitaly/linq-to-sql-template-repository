@@ -5,11 +5,12 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Codevil.TemplateRepository.Model.Entities;
 using Codevil.TemplateRepository.Model.Repositories;
+using Codevil.TemplateRepository.Test.Data;
 
 namespace Codevil.TemplateRepository.Test.Model.Repositories
 {
     [TestClass]
-    public class AccountsRepositoryTest
+    public class AccountsRepositoryTest : DatabaseDependentTest
     {
         [TestMethod]
         public void CreateFindUpdateTest()

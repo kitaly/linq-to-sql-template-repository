@@ -6,10 +6,9 @@ using System.Data.Linq;
 
 namespace Codevil.TemplateRepository.Factories
 {
-    public interface IRowFactory<TDataContext>
-        where TDataContext : DataContext
+    public interface IRowFactory
     {
         object Create(Type rowType);
-        object CreateTable(Type rowType, TDataContext context);
+        object CreateTable(Type rowType, DataContext context);
     }
 }

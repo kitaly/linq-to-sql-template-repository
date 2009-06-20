@@ -38,6 +38,7 @@
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -49,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\DataEntity.cs" />
+    <Compile Include="Entities\UnitOfWork.cs" />
+    <Compile Include="Factories\DataContextFactory.cs" />
     <Compile Include="Factories\IDataContextFactory.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />
     <Compile Include="Factories\IRowFactory.cs" />

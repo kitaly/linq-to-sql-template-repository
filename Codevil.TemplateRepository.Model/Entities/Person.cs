@@ -26,8 +26,8 @@ namespace Codevil.TemplateRepository.Model.Entities
                 return this.accounts;
             }
         }
-        public IRepository<PERSON, Person, BankDataContext> PeopleRepository { get; set; }
-        public IRepository<ACCOUNT, Account, BankDataContext> AccountsRepository { get; set; }
+        public IRepository<PERSON, Person> PeopleRepository { get; set; }
+        public IRepository<ACCOUNT, Account> AccountsRepository { get; set; }
 
         public Person()
             : base()

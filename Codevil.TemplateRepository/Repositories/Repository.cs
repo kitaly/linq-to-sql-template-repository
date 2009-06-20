@@ -6,45 +6,45 @@ using System.Globalization;
 using System.Data.Linq;
 using Codevil.TemplateRepository.Entities;
 using Codevil.TemplateRepository.Factories;
+using System.Transactions;
 
 namespace Codevil.TemplateRepository.Repositories
 {
-    public abstract class Repository<TRow, TEntity, TDataContext> : IRepository<TRow,TEntity,TDataContext>
+    public abstract class Repository<TRow, TEntity> : IRepository<TRow, TEntity>
         where TRow : class
         where TEntity : DataEntity
-        where TDataContext : DataContext
     {
-        public IDataContextFactory<TDataContext> DataContextFactory { get; set; }
+        public IDataContextFactory DataContextFactory { get; set; }
         public IEntityFactory EntityFactory { get; set; }
-        public IRowFactory<TDataContext> RowFactory { get; set; }
+        public IRowFactory RowFactory { get; set; }
 
-        public Repository(IDataContextFactory<TDataContext> dataContextFactory, IEntityFactory entityFactory, IRowFactory<TDataContext> rowFactory)
-            : this (dataContextFactory, entityFactory)
+        public Repository(IDataContextFactory dataContextFactory, IEntityFactory entityFactory, IRowFactory rowFactory)
+            : this(dataContextFactory, entityFactory)
         {
             this.RowFactory = rowFactory;
         }
 
-        public Repository(IDataContextFactory<TDataContext> dataContextFactory, IEntityFactory entityFactory)
+        public Repository(IDataContextFactory dataContextFactory, IEntityFactory entityFactory)
         {
             this.DataContextFactory = dataContextFactory;
             this.EntityFactory = entityFactory;
-            this.RowFactory = new RowFactory<TDataContext>();
+            this.RowFactory = new RowFactory();
         }
 
         protected abstract void BeforeSave(TEntity entity, TRow row);
         protected abstract void AfterSave(TRow row, TEntity entity);
-        protected abstract TRow FindEntity(TEntity entity, TDataContext context);
+        protected abstract TRow FindEntity(TEntity entity, DataContext context);
 
-        protected virtual void Update(TRow row, TEntity entity, TDataContext context)
+        protected virtual void Update(TRow row, TEntity entity, DataContext context)
         {
             this.BeforeSave(entity, row);
-            
+
             context.SubmitChanges();
 
             this.AfterSave(row, entity);
         }
 
-        protected virtual void Create(TEntity entity, TDataContext context)
+        protected virtual void Create(TEntity entity, DataContext context)
         {
             TRow row = (TRow)this.RowFactory.Create(typeof(TRow));
             Table<TRow> table = (Table<TRow>)this.RowFactory.CreateTable(typeof(TRow), context);
@@ -64,7 +64,7 @@ namespace Codevil.TemplateRepository.Repositories
                 throw new ArgumentNullException("entity", String.Format(CultureInfo.CurrentCulture, "Entity can't be null"));
             }
 
-            TDataContext context = this.DataContextFactory.Create();
+            DataContext context = this.DataContextFactory.Create();
 
             try
             {
@@ -85,7 +85,37 @@ namespace Codevil.TemplateRepository.Repositories
             }
         }
 
-        public void Save(TEntity entity, TDataContext context)
+        public void Save(TEntity entity, UnitOfWork unitOfWork)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity", String.Format(CultureInfo.CurrentCulture, "Entity can't be null"));
+            }
+
+            DataContext context = unitOfWork.DataContext;
+
+            try
+            {
+                TRow retrievedRow = this.FindEntity(entity, context);
+
+                if (retrievedRow != null)
+                {
+                    this.Update(retrievedRow, entity, context);
+                }
+                else
+                {
+                    this.Create(entity, context);
+                }
+            }
+            catch
+            {
+                unitOfWork.Rollback();
+
+                throw;
+            }
+        }
+
+        public void Save(TEntity entity, DataContext context)
         {
             TRow retrievedRow = this.FindEntity(entity, context);
 
@@ -101,7 +131,7 @@ namespace Codevil.TemplateRepository.Repositories
 
         public TEntity FindSingle(Func<TRow, bool> exp)
         {
-            TDataContext context = this.DataContextFactory.Create();
+            DataContext context = this.DataContextFactory.Create();
             TEntity entity = null;
 
             try
@@ -127,7 +157,7 @@ namespace Codevil.TemplateRepository.Repositories
 
         public IList<TEntity> Find(Func<TRow, bool> exp)
         {
-            TDataContext context = (TDataContext)this.DataContextFactory.Create();
+            DataContext context = (DataContext)this.DataContextFactory.Create();
 
             IList<TEntity> list = new List<TEntity>();
 
@@ -143,7 +173,7 @@ namespace Codevil.TemplateRepository.Repositories
             return list;
         }
 
-        protected TRow FindSingle(Func<TRow, bool> exp, TDataContext context)
+        protected TRow FindSingle(Func<TRow, bool> exp, DataContext context)
         {
             IList<TRow> rows = this.Find(exp, context);
 
@@ -161,7 +191,7 @@ namespace Codevil.TemplateRepository.Repositories
             }
         }
 
-        protected IList<TRow> Find(Func<TRow, bool> exp, TDataContext context)
+        protected IList<TRow> Find(Func<TRow, bool> exp, DataContext context)
         {
             return context.GetTable<TRow>().Where(exp).ToList();
         }

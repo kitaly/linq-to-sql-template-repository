@@ -31,8 +31,8 @@ namespace Codevil.TemplateRepository.Model.Entities
                 this.owner = value;
             }
         }
-        public IRepository<ACCOUNT, Account, BankDataContext> AccountsRepository { get; set; }
-        public IRepository<PERSON, Person, BankDataContext> PeopleRepository { get; set; }
+        public IRepository<ACCOUNT, Account> AccountsRepository { get; set; }
+        public IRepository<PERSON, Person> PeopleRepository { get; set; }
 
         public Account()
             : base()

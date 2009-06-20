@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace Codevil.TemplateRepository.Model.Factories
 {
-    public class RowFactory : Codevil.TemplateRepository.Factories.RowFactory<BankDataContext>
+    public class RowFactory : Codevil.TemplateRepository.Factories.RowFactory
     {
         public override System.Collections.Hashtable MapPluralInflections()
         {

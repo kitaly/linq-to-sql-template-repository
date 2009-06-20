@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Data.Linq;
 using Codevil.TemplateRepository.Factories;
+using Codevil.TemplateRepository.Entities;
 
 namespace Codevil.TemplateRepository.Data.Factories
 {
-    public class BankDataContextFactory : IDataContextFactory<BankDataContext>
+    public class BankDataContextFactory : DataContextFactory
     {
-        public BankDataContext Create()
+        public override DataContext Create()
         {
             return new BankDataContext(@"Data Source=MARVIN\SQLEXPRESS;Initial Catalog=bank;Integrated Security=True");
         }

@@ -9,7 +9,7 @@ namespace Codevil.TemplateRepository.Migrations
     {
         static void Main(string[] args)
         {
-            Migrator.Migrate();
+            Migrator.Up();
         }
     }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Linq;
+using Codevil.TemplateRepository.Entities;
 
 namespace Codevil.TemplateRepository.Factories
 {
-    public interface IDataContextFactory<TDataContext>
-        where TDataContext : DataContext
+    public interface IDataContextFactory
     {
-        TDataContext Create();
+        DataContext Create();
+        UnitOfWork CreateUnitOfWork();
     }
 }
