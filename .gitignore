@@ -6,3 +6,7 @@ bin/**
 obj/**
 *.stackdump
 TestResults/**
+*.exe
+*.manifest
+*.cache
+*.log
