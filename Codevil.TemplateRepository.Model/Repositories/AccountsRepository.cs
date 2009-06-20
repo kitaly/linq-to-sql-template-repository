@@ -7,17 +7,11 @@ using Codevil.TemplateRepository.Model.Entities;
 using Codevil.TemplateRepository.Data.Factories;
 using System.Data.Linq;
 using Codevil.TemplateRepository.Model.Factories;
-using Codevil.TemplateRepository.Repositories;
 
 namespace Codevil.TemplateRepository.Model.Repositories
 {
     public class AccountsRepository : Repository<ACCOUNT, Account>
     {
-        public AccountsRepository()
-            : base(new BankDataContextFactory(), new EntityFactory(), new RowFactory())
-        {
-        }
-
         protected override ACCOUNT FindEntity(Account entity, DataContext context)
         {
             return FindSingle(a => a.Id == entity.Id, context);
