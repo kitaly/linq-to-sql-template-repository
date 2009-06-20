@@ -1,0 +1,8 @@
+bin/**
+*.suo
+*.user
+*.dll
+*.pdb
+obj/**
+*.stackdump
+TestResults/**

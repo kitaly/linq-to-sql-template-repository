@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="bank" Class="BankDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=marvin\sqlexpress;Initial Catalog=bank;Integrated Security=True;Pooling=False" SettingsObjectName="Codevil.TemplateRepository.Data.Properties.Settings" SettingsPropertyName="bankConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ACCOUNTS" Member="ACCOUNTs">
+    <Type Name="ACCOUNT">
+      <Column Name="id" Member="Id" Storage="_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="number" Member="Number" Storage="_number" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="agency" Member="Agency" Storage="_agency" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="person_id" Member="OwnerId" Storage="_person_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PEOPLE_ACCOUNT" Member="PERSON" Storage="_PEOPLE" ThisKey="OwnerId" OtherKey="Id" Type="PERSON" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PEOPLE" Member="PERSONs">
+    <Type Name="PERSON">
+      <Column Name="id" Member="Id" Storage="_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Member="Name" Storage="_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="document" Member="Document" Storage="_document" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Member="Email" Storage="_email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="PEOPLE_ACCOUNT" Member="ACCOUNTs" ThisKey="Id" OtherKey="OwnerId" Type="ACCOUNT" />
+    </Type>
+  </Table>
+</Database>

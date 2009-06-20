@@ -1,0 +1,6 @@
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Migrations\bin\Debug\Codevil.TemplateRepository.Migrations.exe
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Migrations\bin\Debug\Codevil.TemplateRepository.Migrations.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Migrations\bin\Debug\RikMigrations.exe
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Migrations\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Migrations\obj\Debug\Codevil.TemplateRepository.Migrations.exe
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Migrations\obj\Debug\Codevil.TemplateRepository.Migrations.pdb

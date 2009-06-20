@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codevil.TemplateRepository.Data", "Codevil.TemplateRepository.Data\Codevil.TemplateRepository.Data.csproj", "{7B3874CF-428A-4FD2-AF45-80D6974B8AFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codevil.TemplateRepository.Model", "Codevil.TemplateRepository.Model\Codevil.TemplateRepository.Model.csproj", "{8ACFC43B-C725-4FC5-A876-69D6A0B11D9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codevil.TemplateRepository.Migrations", "Codevil.TemplateRepository.Migrations\Codevil.TemplateRepository.Migrations.csproj", "{560C16BB-981F-46F8-81C2-E68CB0C32D40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8E3F802B-2554-421A-981C-E56457E6B51E}"
+	ProjectSection(SolutionItems) = preProject
+		Codevil.TemplateRepository.vsmdi = Codevil.TemplateRepository.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codevil.TemplateRepository.Test", "Codevil.TemplateRepository.Test\Codevil.TemplateRepository.Test.csproj", "{B1256979-1232-4D6D-A4B1-C7D330DF0ED6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codevil.TemplateRepository", "Codevil.TemplateRepository\Codevil.TemplateRepository.csproj", "{B38E4C6D-1BAE-4016-B331-3C43E61E8C2A}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Codevil.TemplateRepository.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B3874CF-428A-4FD2-AF45-80D6974B8AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3874CF-428A-4FD2-AF45-80D6974B8AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3874CF-428A-4FD2-AF45-80D6974B8AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3874CF-428A-4FD2-AF45-80D6974B8AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ACFC43B-C725-4FC5-A876-69D6A0B11D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACFC43B-C725-4FC5-A876-69D6A0B11D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACFC43B-C725-4FC5-A876-69D6A0B11D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACFC43B-C725-4FC5-A876-69D6A0B11D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{560C16BB-981F-46F8-81C2-E68CB0C32D40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{560C16BB-981F-46F8-81C2-E68CB0C32D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{560C16BB-981F-46F8-81C2-E68CB0C32D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{560C16BB-981F-46F8-81C2-E68CB0C32D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1256979-1232-4D6D-A4B1-C7D330DF0ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1256979-1232-4D6D-A4B1-C7D330DF0ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1256979-1232-4D6D-A4B1-C7D330DF0ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1256979-1232-4D6D-A4B1-C7D330DF0ED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38E4C6D-1BAE-4016-B331-3C43E61E8C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38E4C6D-1BAE-4016-B331-3C43E61E8C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38E4C6D-1BAE-4016-B331-3C43E61E8C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38E4C6D-1BAE-4016-B331-3C43E61E8C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
