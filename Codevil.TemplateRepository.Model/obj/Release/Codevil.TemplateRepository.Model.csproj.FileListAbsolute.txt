@@ -1,0 +1,9 @@
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\bin\Release\Codevil.TemplateRepository.Model.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\bin\Release\Codevil.TemplateRepository.Model.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\bin\Release\Codevil.TemplateRepository.Data.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\bin\Release\Codevil.TemplateRepository.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\bin\Release\Codevil.TemplateRepository.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\bin\Release\Codevil.TemplateRepository.Data.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\obj\Release\ResolveAssemblyReference.cache
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\obj\Release\Codevil.TemplateRepository.Model.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Model\obj\Release\Codevil.TemplateRepository.Model.pdb

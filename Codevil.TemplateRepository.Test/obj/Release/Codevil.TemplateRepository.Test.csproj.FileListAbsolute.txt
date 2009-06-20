@@ -1,0 +1,14 @@
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Test.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Test.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Data.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Migrations.exe
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Model.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\RikMigrations.exe
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Data.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Migrations.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\bin\Release\Codevil.TemplateRepository.Model.pdb
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\obj\Release\ResolveAssemblyReference.cache
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\obj\Release\Codevil.TemplateRepository.Test.dll
+C:\Users\MACSkeptic\Documents\Visual Studio 2008\Projects\Codevil.TemplateRepository\Codevil.TemplateRepository.Test\obj\Release\Codevil.TemplateRepository.Test.pdb

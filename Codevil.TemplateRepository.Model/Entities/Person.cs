@@ -39,9 +39,28 @@ namespace Codevil.TemplateRepository.Model.Entities
         public Person(PERSON row)
             : this()
         {
+            this.Id = row.Id;
             this.Name = row.Name;
             this.Document = row.Document;
             this.Email = row.Email;
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool areEqual = false;
+
+            if (obj is Person)
+            {
+                Person that = obj as Person;
+
+                areEqual =
+                    this.Id == that.Id &&
+                    this.Name == that.Name &&
+                    this.Document == that.Document &&
+                    this.Email == that.Email;
+            }
+
+            return areEqual;
         }
     }
 }

@@ -12,17 +12,30 @@ namespace Codevil.TemplateRepository.Test.Repositories
     public class PeopleRepositoryTest
     {
         [TestMethod]
-        public void CreateTest()
+        public void CreateFindUpdateTest()
         {
-            Person p = new Person();
-            p.Name = "gandamu strike freedom";
-            p.Document = "ZGMFX20A";
-            p.Email = "zaft@no.tameni";
+            Person createdPerson = new Person();
+            createdPerson.Name = "gandamu strike freedom";
+            createdPerson.Document = "ZGMFX20A";
+            createdPerson.Email = "zaft@no.tameni";
 
-            PeopleRepository repo = new PeopleRepository();
-            repo.Save(p);
+            PeopleRepository repository = new PeopleRepository();
 
-            Assert.AreNotEqual(0, p.Id);
+            repository.Save(createdPerson);
+
+            Assert.AreNotEqual(0, createdPerson.Id);
+
+            Person retrievedPerson = repository.FindSingle(p => p.Id == createdPerson.Id);
+
+            Assert.AreEqual(createdPerson, retrievedPerson);
+
+            retrievedPerson.Email = "kira.yamato@freedom.jp";
+
+            repository.Save(retrievedPerson);
+
+            retrievedPerson = repository.FindSingle(p => p.Id == createdPerson.Id);
+
+            Assert.AreEqual("kira.yamato@freedom.jp", retrievedPerson.Email);
         }
     }
 }

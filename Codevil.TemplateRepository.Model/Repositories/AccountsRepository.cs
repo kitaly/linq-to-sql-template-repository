@@ -23,15 +23,6 @@ namespace Codevil.TemplateRepository.Model.Repositories
             return FindSingle(a => a.Id == entity.Id, context);
         }
 
-        protected override void Create(Account entity, BankDataContext context)
-        {
-            ACCOUNT row = new ACCOUNT();
-            this.MapToRow(entity, row);
-            Table<ACCOUNT> table = context.ACCOUNTs;
-            table.InsertOnSubmit(row);
-            context.SubmitChanges();
-        }
-
         protected override void MapToRow(Account entity, ACCOUNT row)
         {
             row.Agency = entity.Agency;

@@ -59,18 +59,24 @@ namespace Codevil.TemplateRepository.Repositories
             }
 
             TDataContext context = this.DataContextFactory.Create();
-            TRow retrievedRow = this.FindEntity(entity, context);
 
-            if (retrievedRow != null)
+            try
             {
-                this.Update(retrievedRow, entity, context);
-            }
-            else
-            {
-                this.Create(entity, context);
-            }
+                TRow retrievedRow = this.FindEntity(entity, context);
 
-            context.Dispose();
+                if (retrievedRow != null)
+                {
+                    this.Update(retrievedRow, entity, context);
+                }
+                else
+                {
+                    this.Create(entity, context);
+                }
+            }
+            finally
+            {
+                context.Dispose();
+            }
         }
 
         public void Save(TEntity entity, TDataContext context)
@@ -90,28 +96,44 @@ namespace Codevil.TemplateRepository.Repositories
         public TEntity FindSingle(Func<TRow, bool> exp)
         {
             TDataContext context = this.DataContextFactory.Create();
-            TRow row = this.FindSingle(exp, context);
-
             TEntity entity = null;
 
-            if (row != null)
+            try
             {
-                entity = (TEntity)EntityFactory.Create(row);
+                TRow row = this.FindSingle(exp, context);
+
+                if (row != null)
+                {
+                    entity = (TEntity)EntityFactory.Create(row);
+                }
+                else
+                {
+                    entity = null;
+                }
             }
-            else
+            finally
             {
-                entity = null;
+                context.Dispose();
             }
 
-            context.Dispose();
             return entity;
         }
 
         public IList<TEntity> Find(Func<TRow, bool> exp)
         {
             TDataContext context = (TDataContext)this.DataContextFactory.Create();
-            IList<TEntity> list = this.ToEntity(this.Find(exp, context));
-            context.Dispose();
+
+            IList<TEntity> list = new List<TEntity>();
+
+            try
+            {
+                list = this.ToEntity(this.Find(exp, context));
+            }
+            finally
+            {
+                context.Dispose();
+            }
+
             return list;
         }
 
