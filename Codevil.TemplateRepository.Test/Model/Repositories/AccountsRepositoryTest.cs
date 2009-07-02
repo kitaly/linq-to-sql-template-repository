@@ -2,6 +2,7 @@
 using Codevil.TemplateRepository.Model.Repositories;
 using Codevil.TemplateRepository.Test.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Codevil.TemplateRepository.Test.Model.Repositories
 {
@@ -9,7 +10,7 @@ namespace Codevil.TemplateRepository.Test.Model.Repositories
     public class AccountsRepositoryTest : DatabaseDependentTest
     {
         [TestMethod]
-        public void CreateFindUpdateTest()
+        public void CreateFindUpdateDeleteTest()
         {
             Person createdPerson = new Person();
             createdPerson.Name = "gandamu strike freedom";
@@ -40,8 +41,16 @@ namespace Codevil.TemplateRepository.Test.Model.Repositories
             repository.Save(retrievedAccount);
 
             retrievedAccount = repository.FindSingle(a => a.Id == createdAccount.Id);
+            IList<Account> accounts = repository.Find(a => a.Id == createdAccount.Id);
 
             Assert.AreEqual(666, retrievedAccount.Agency);
+            Assert.AreEqual(1, accounts.Count);
+
+            repository.Delete(retrievedAccount);
+
+            accounts = repository.Find(a => a.Id == createdAccount.Id);
+
+            Assert.AreEqual(0, accounts.Count);
         }
 
         [TestMethod]

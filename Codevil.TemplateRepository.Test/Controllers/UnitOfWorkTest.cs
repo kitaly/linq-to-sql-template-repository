@@ -41,7 +41,7 @@ namespace Codevil.TemplateRepository.Test.Controllers
         }
 
         [TestMethod]
-        public void TransactionCommitTest()
+        public void TransactionCommitRollbackTest()
         {
             PeopleRepository peopleRepository = new PeopleRepository();
             AccountsRepository accountsRepository = new AccountsRepository();
@@ -68,6 +68,26 @@ namespace Codevil.TemplateRepository.Test.Controllers
 
             Assert.IsNotNull(peopleRepository.FindSingle(p => p.Name == createdPerson.Name));
             Assert.IsNotNull(accountsRepository.FindSingle(a => a.Number == createdAccount.Number));
+
+            unitOfWork = contextFactory.CreateUnitOfWork();
+
+            accountsRepository.Delete(createdAccount, unitOfWork);
+            peopleRepository.Delete(createdPerson, unitOfWork);
+
+            unitOfWork.Rollback();
+
+            Assert.IsNotNull(peopleRepository.FindSingle(p => p.Name == createdPerson.Name));
+            Assert.IsNotNull(accountsRepository.FindSingle(a => a.Number == createdAccount.Number));
+
+            unitOfWork = contextFactory.CreateUnitOfWork();
+
+            accountsRepository.Delete(createdAccount, unitOfWork);
+            peopleRepository.Delete(createdPerson, unitOfWork);
+
+            unitOfWork.Commit();
+
+            Assert.IsNull(peopleRepository.FindSingle(p => p.Name == createdPerson.Name));
+            Assert.IsNull(accountsRepository.FindSingle(a => a.Number == createdAccount.Number));
         }
     }
 }

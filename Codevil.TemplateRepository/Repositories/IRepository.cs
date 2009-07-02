@@ -42,6 +42,30 @@ namespace Codevil.TemplateRepository.Repositories
 
         /// <summary>
         /// <para>
+        /// This method will delete an entity from the database
+        /// </para>
+        /// </summary>
+        /// <param name="entity">The entity that is going to be deleted</param>
+        void Delete(TEntity entity);
+
+        /// <summary>
+        /// <para>
+        /// This method will delete an entity from the database
+        /// using an unit of work to handle the transaction
+        /// </para>
+        /// <para>
+        /// You can call it multiple times, for different repositories and entities
+        /// and as long as you pass the same instance of a unit of work as a parameter,
+        /// all operations will be enclosed in the same transaction. After that, you
+        /// can decide to commit or rollback the transaction
+        /// </para>
+        /// </summary>
+        /// <param name="entity">The entity that is going to be deleted</param>
+        /// <param name="unitOfWork">The unit of work in which the operation will take place</param>
+        void Delete(TEntity entity, UnitOfWork unitOfWork);
+
+        /// <summary>
+        /// <para>
         /// This method will persist (create or update) an entity on the database
         /// using an auto-commit transaction
         /// </para>

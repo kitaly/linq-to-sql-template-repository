@@ -173,6 +173,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// <param name="entity">The entity that will be used as base for the update operation</param>
         protected virtual void BeforeUpdate(TRow row, TEntity entity)
         {
+            this.BeforeSave(row, entity);
         }
 
         /// <summary>
@@ -186,13 +187,11 @@ namespace Codevil.TemplateRepository.Repositories
         /// <param name="context">The context in which the operation is going to take place</param>
         protected virtual void Update(TRow row, TEntity entity, DataContext context)
         {
-            this.BeforeSave(row, entity);
             this.BeforeUpdate(row, entity);
 
             context.SubmitChanges();
 
             this.AfterUpdate(row, entity);
-            this.AfterSave(row, entity);
         }
 
         /// <summary>
@@ -202,6 +201,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// <param name="entity">The entity that was used as base for the update operation</param>
         protected virtual void AfterUpdate(TRow row, TEntity entity)
         {
+            this.AfterSave(row, entity);
         }
         #endregion
 
@@ -213,6 +213,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// <param name="entity">The entity that will be used as base for the create operation</param>
         protected virtual void BeforeCreate(TRow row, TEntity entity)
         {
+            this.BeforeSave(row, entity);
         }
 
         /// <summary>
@@ -228,14 +229,12 @@ namespace Codevil.TemplateRepository.Repositories
             TRow row = (TRow)this.RowFactory.Create(typeof(TRow));
             Table<TRow> table = (Table<TRow>)this.RowFactory.CreateTable(typeof(TRow), context);
 
-            this.BeforeSave(row, entity);
             this.BeforeCreate(row, entity);
 
             table.InsertOnSubmit(row);
             context.SubmitChanges();
 
             this.AfterCreate(row, entity);
-            this.AfterSave(row, entity);
         }
 
         /// <summary>
@@ -245,6 +244,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// <param name="entity">The entity that was used as base for the create operation</param>
         protected virtual void AfterCreate(TRow row, TEntity entity)
         {
+            this.AfterSave(row, entity);
         }
         #endregion
         #endregion
@@ -367,6 +367,76 @@ namespace Codevil.TemplateRepository.Repositories
             IQueryable<TRow> data = (from row in context.GetTable<TRow>() select row);
 
             return data.Where(exp).ToList();
+        }
+        #endregion
+
+        #region delete
+        public virtual void Delete(TEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity", String.Format(CultureInfo.CurrentCulture, "Entity can't be null"));
+            }
+
+            DataContext context = this.DataContextFactory.Create();
+
+            try
+            {
+                this.Delete(entity, context);
+            }
+            finally
+            {
+                context.Dispose();
+            }
+        }
+
+        public virtual void Delete(TEntity entity, UnitOfWork unitOfWork)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity", String.Format(CultureInfo.CurrentCulture, "Entity can't be null"));
+            }
+
+            DataContext context = unitOfWork.DataContext;
+
+            try
+            {
+                this.Delete(entity, context);
+            }
+            catch
+            {
+                if (this.AutoRollbackOnError)
+                {
+                    unitOfWork.Rollback();
+                }
+
+                throw;
+            }
+        }
+
+        public virtual void BeforeDelete(TRow row, TEntity entity)
+        {
+        }
+
+        public virtual void Delete(TEntity entity, DataContext context)
+        {
+            TRow row = this.FindEntity(entity, context);
+
+            if (row != null)
+            {
+                Table<TRow> table = (Table<TRow>)this.RowFactory.CreateTable(typeof(TRow), context);
+
+                this.BeforeDelete(row, entity);
+
+                table.DeleteOnSubmit(row);
+                context.SubmitChanges();
+
+                this.AfterDelete(row, entity);
+            }
+        }
+                
+        public virtual void AfterDelete(TRow row, TEntity entity)
+        {
         }
         #endregion
 
