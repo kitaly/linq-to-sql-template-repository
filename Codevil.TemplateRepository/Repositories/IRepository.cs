@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Codevil.TemplateRepository.Entities;
 using Codevil.TemplateRepository.Factories;
 using Codevil.TemplateRepository.Controllers;
+using System.Linq.Expressions;
 
 namespace Codevil.TemplateRepository.Repositories
 {
@@ -27,7 +28,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// <returns>
         /// If no entries can be found, it will return an empty list
         /// </returns>
-        IList<TEntity> Find(Func<TRow, bool> exp);
+        IList<TEntity> Find(Expression<Func<TRow, bool>> exp);
 
         /// <summary>
         /// This method finds a single entry of a given entity on the database
@@ -37,7 +38,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// If more than one entry is found, an exception will be thrown. 
         /// If no entries can be found, it will return null
         /// </returns>
-        TEntity FindSingle(Func<TRow, bool> exp);
+        TEntity FindSingle(Expression<Func<TRow, bool>> exp);
 
         /// <summary>
         /// <para>

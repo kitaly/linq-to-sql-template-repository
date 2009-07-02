@@ -6,6 +6,7 @@ using System.Linq;
 using Codevil.TemplateRepository.Controllers;
 using Codevil.TemplateRepository.Entities;
 using Codevil.TemplateRepository.Factories;
+using System.Linq.Expressions;
 
 namespace Codevil.TemplateRepository.Repositories
 {
@@ -273,7 +274,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// If more than one entry is found, an exception will be thrown. 
         /// If no entries can be found, it will return null
         /// </returns>
-        public virtual TEntity FindSingle(Func<TRow, bool> exp)
+        public virtual TEntity FindSingle(Expression<Func<TRow, bool>> exp)
         {
             DataContext context = this.DataContextFactory.Create();
             TEntity entity = null;
@@ -306,7 +307,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// <returns>
         /// If no entries can be found, it will return an empty list
         /// </returns>
-        public virtual IList<TEntity> Find(Func<TRow, bool> exp)
+        public virtual IList<TEntity> Find(Expression<Func<TRow, bool>> exp)
         {
             DataContext context = (DataContext)this.DataContextFactory.Create();
 
@@ -334,7 +335,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// If more than one entry is found, an exception will be thrown. 
         /// If no entries can be found, it will return null
         /// </returns>
-        protected virtual TRow FindSingle(Func<TRow, bool> exp, DataContext context)
+        protected virtual TRow FindSingle(Expression<Func<TRow, bool>> exp, DataContext context)
         {
             IList<TRow> rows = this.Find(exp, context);
 
@@ -361,7 +362,7 @@ namespace Codevil.TemplateRepository.Repositories
         /// <returns>
         /// If no entries can be found, it will return an empty list
         /// </returns>
-        protected virtual IList<TRow> Find(Func<TRow, bool> exp, DataContext context)
+        protected virtual IList<TRow> Find(Expression<Func<TRow, bool>> exp, DataContext context)
         {
             return context.GetTable<TRow>().Where(exp).ToList();
         }
