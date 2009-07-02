@@ -364,7 +364,9 @@ namespace Codevil.TemplateRepository.Repositories
         /// </returns>
         protected virtual IList<TRow> Find(Expression<Func<TRow, bool>> exp, DataContext context)
         {
-            return context.GetTable<TRow>().Where(exp).ToList();
+            IQueryable<TRow> data = (from row in context.GetTable<TRow>() select row);
+
+            return data.Where(exp).ToList();
         }
         #endregion
 
