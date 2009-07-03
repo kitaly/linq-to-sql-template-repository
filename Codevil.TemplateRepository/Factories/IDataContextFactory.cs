@@ -1,11 +1,11 @@
 ﻿using System.Data.Linq;
-using Codevil.TemplateRepository.Controllers;
+using Codevil.TemplateRepository.Handlers;
 
 namespace Codevil.TemplateRepository.Factories
 {
     public interface IDataContextFactory
     {
         DataContext Create();
-        UnitOfWork CreateUnitOfWork();
+        Transaction CreateTransaction();
     }
 }

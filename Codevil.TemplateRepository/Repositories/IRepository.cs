@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Codevil.TemplateRepository.Entities;
 using Codevil.TemplateRepository.Factories;
-using Codevil.TemplateRepository.Controllers;
+using Codevil.TemplateRepository.Handlers;
 using System.Linq.Expressions;
 
 namespace Codevil.TemplateRepository.Repositories
@@ -57,18 +57,18 @@ namespace Codevil.TemplateRepository.Repositories
         /// <summary>
         /// <para>
         /// This method will persist (create or update) an entity on the database
-        /// using an unit of work to handle the transaction
+        /// using an transaction to handle the transaction
         /// </para>
         /// <para>
         /// You can call it multiple times, for different repositories and entities
-        /// and as long as you pass the same instance of a unit of work as a parameter,
+        /// and as long as you pass the same instance of a transaction as a parameter,
         /// all operations will be enclosed in the same transaction. After that, you
         /// can decide to commit or rollback the transaction
         /// </para>
         /// </summary>
         /// <param name="entity">The entity that is going to be persisted</param>
-        /// <param name="unitOfWork">The unit of work in which the operation will take place</param>
-        void Save(TEntity entity, UnitOfWork unitOfWork);
+        /// <param name="transaction">The transaction in which the operation will take place</param>
+        void Save(TEntity entity, Transaction transaction);
         #endregion
 
         #region delete
@@ -83,18 +83,18 @@ namespace Codevil.TemplateRepository.Repositories
         /// <summary>
         /// <para>
         /// This method will delete an entity from the database
-        /// using an unit of work to handle the transaction
+        /// using an transaction to handle the transaction
         /// </para>
         /// <para>
         /// You can call it multiple times, for different repositories and entities
-        /// and as long as you pass the same instance of a unit of work as a parameter,
+        /// and as long as you pass the same instance of a transaction as a parameter,
         /// all operations will be enclosed in the same transaction. After that, you
         /// can decide to commit or rollback the transaction
         /// </para>
         /// </summary>
         /// <param name="entity">The entity that is going to be deleted</param>
-        /// <param name="unitOfWork">The unit of work in which the operation will take place</param>
-        void Delete(TEntity entity, UnitOfWork unitOfWork);
+        /// <param name="transaction">The transaction in which the operation will take place</param>
+        void Delete(TEntity entity, Transaction transaction);
         #endregion
     }
 }

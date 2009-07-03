@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Linq;
 using System.Globalization;
 using System.Linq;
-using Codevil.TemplateRepository.Controllers;
+using Codevil.TemplateRepository.Handlers;
 using Codevil.TemplateRepository.Entities;
 using Codevil.TemplateRepository.Factories;
 using System.Linq.Expressions;
@@ -99,25 +99,25 @@ namespace Codevil.TemplateRepository.Repositories
         /// <summary>
         /// <para>
         /// This method will persist (create or update) an entity on the database
-        /// using an unit of work to handle the transaction
+        /// using an transaction to handle the transaction
         /// </para>
         /// <para>
         /// You can call it multiple times, for different repositories and entities
-        /// and as long as you pass the same instance of a unit of work as a parameter,
+        /// and as long as you pass the same instance of a transaction as a parameter,
         /// all operations will be enclosed in the same transaction. After that, you
         /// can decide to commit or rollback the transaction
         /// </para>
         /// </summary>
         /// <param name="entity">The entity that is going to be persisted</param>
-        /// <param name="unitOfWork">The unit of work in which the operation will take place</param>
-        public virtual void Save(TEntity entity, UnitOfWork unitOfWork)
+        /// <param name="transaction">The transaction in which the operation will take place</param>
+        public virtual void Save(TEntity entity, Transaction transaction)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity", String.Format(CultureInfo.CurrentCulture, "Entity can't be null"));
             }
 
-            DataContext context = unitOfWork.DataContext;
+            DataContext context = transaction.DataContext;
 
             try
             {
@@ -127,7 +127,7 @@ namespace Codevil.TemplateRepository.Repositories
             {
                 if (this.AutoRollbackOnError)
                 {
-                    unitOfWork.Rollback();
+                    transaction.Rollback();
                 }
 
                 throw;
@@ -390,14 +390,14 @@ namespace Codevil.TemplateRepository.Repositories
             }
         }
 
-        public virtual void Delete(TEntity entity, UnitOfWork unitOfWork)
+        public virtual void Delete(TEntity entity, Transaction transaction)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity", String.Format(CultureInfo.CurrentCulture, "Entity can't be null"));
             }
 
-            DataContext context = unitOfWork.DataContext;
+            DataContext context = transaction.DataContext;
 
             try
             {
@@ -407,7 +407,7 @@ namespace Codevil.TemplateRepository.Repositories
             {
                 if (this.AutoRollbackOnError)
                 {
-                    unitOfWork.Rollback();
+                    transaction.Rollback();
                 }
 
                 throw;

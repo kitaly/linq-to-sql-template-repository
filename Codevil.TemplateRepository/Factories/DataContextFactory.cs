@@ -1,5 +1,5 @@
 ﻿using System.Data.Linq;
-using Codevil.TemplateRepository.Controllers;
+using Codevil.TemplateRepository.Handlers;
 
 namespace Codevil.TemplateRepository.Factories
 {
@@ -7,9 +7,9 @@ namespace Codevil.TemplateRepository.Factories
     {
         public abstract DataContext Create();
 
-        public virtual UnitOfWork CreateUnitOfWork()
+        public virtual Transaction CreateTransaction()
         {
-            return new UnitOfWork(this.Create());
+            return new Transaction(this.Create());
         }
     }
 }
